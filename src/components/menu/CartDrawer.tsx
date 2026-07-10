@@ -1,10 +1,9 @@
 import { AnimatePresence, motion } from "framer-motion";
-import { Minus, Plus, ShoppingBag, Trash2, X, PhoneCall } from "lucide-react";
+import { Minus, Plus, ShoppingBag, Trash2, X } from "lucide-react";
 import { useCart } from "../../store/cart";
 import type { MenuItem } from "../../types";
 import { formatIQD } from "../../lib/utils";
-import { useMemo, useState } from "react";
-import { Button } from "../ui/Button";
+import { useMemo } from "react";
 
 export function CartDrawer({
   items,
@@ -14,7 +13,6 @@ export function CartDrawer({
   lang: "ar" | "en";
 }) {
   const { isOpen, close, lines, addItem, decrement, removeItem, clear } = useCart();
-  const [waiterCalled, setWaiterCalled] = useState(false);
 
   const itemsMap = useMemo(() => new Map(items.map((i) => [i.id, i])), [items]);
 
@@ -22,11 +20,6 @@ export function CartDrawer({
     const item = itemsMap.get(l.itemId);
     return sum + (item ? item.price * l.qty : 0);
   }, 0);
-
-  const callWaiter = () => {
-    setWaiterCalled(true);
-    setTimeout(() => setWaiterCalled(false), 3000);
-  };
 
   return (
     <AnimatePresence>
@@ -137,16 +130,6 @@ export function CartDrawer({
                     {formatIQD(total)}
                   </span>
                 </div>
-                <Button className="w-full" size="lg" onClick={callWaiter}>
-                  <PhoneCall size={16} />
-                  {waiterCalled
-                    ? lang === "ar"
-                      ? "تم استدعاء النادل ✓"
-                      : "Waiter is on the way ✓"
-                    : lang === "ar"
-                    ? "نادِ النادل لتأكيد الطلب"
-                    : "Call waiter to confirm"}
-                </Button>
                 <button
                   onClick={clear}
                   className="w-full text-center text-xs text-cream-dim hover:text-rust transition-colors"
