@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
+import type { Restaurant } from "../../types";
 
-export function Hero({ lang }: { lang: "ar" | "en" }) {
+export function Hero({ restaurant, lang }: { restaurant?: Restaurant; lang: "ar" | "en" }) {
   return (
     <header className="relative flex min-h-[70vh] flex-col items-center justify-center overflow-hidden px-6 text-center">
       <motion.div
@@ -25,15 +26,10 @@ export function Hero({ lang }: { lang: "ar" | "en" }) {
         transition={{ duration: 1, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
         className="mt-3 font-arDisplay text-6xl font-bold text-cream md:text-8xl"
       >
-        ١٩٨٩
+        {restaurant?.name || "١٩٨٩"}
       </motion.h1>
 
-      <motion.svg
-        width="120"
-        height="12"
-        viewBox="0 0 120 12"
-        className="mt-4"
-      >
+      <motion.svg width="120" height="12" viewBox="0 0 120 12" className="mt-4">
         <motion.path
           d="M0 6 H120"
           stroke="#C9A24B"
@@ -51,8 +47,8 @@ export function Hero({ lang }: { lang: "ar" | "en" }) {
         className="mt-4 max-w-md font-arBody text-sm text-cream-muted"
       >
         {lang === "ar"
-          ? "كل طبق قيد موثّق بذاكرة المطبخ منذ أول يوم"
-          : "Every dish, a documented entry since day one"}
+          ? restaurant?.about || "كل طبق قيد موثّق بذاكرة المطبخ منذ أول يوم"
+          : restaurant?.aboutEn || "Every dish, a documented entry since day one"}
       </motion.p>
     </header>
   );
