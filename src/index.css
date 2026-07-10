@@ -1,9 +1,54 @@
+@import url("https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&family=Tajawal:wght@300;400;500;700;900&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Inter:wght@300;400;500;600;700&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
 body {
-  background-color: theme('colors.base');
-  background-image:
-    radial-gradient(ellipse at top, rgba(201,162,75,0.05), transparent 60%),
-    url('/textures/paper-grain.png');
-  background-blend-mode: overlay;
+  margin: 0;
+  background-color: #0D1210;
+  background-image: radial-gradient(ellipse at top, rgba(201, 162, 75, 0.05), transparent 60%);
+  color: #F4ECD8;
+  font-family: "Inter", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+html[dir="rtl"] body { font-family: "Tajawal", sans-serif; }
+
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: #121814; }
+::-webkit-scrollbar-thumb { background: #26332B; border-radius: 10px; }
+::-webkit-scrollbar-thumb:hover { background: #C9A24B; }
+
+a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible, select:focus-visible {
+  outline: 2px solid #C9A24B;
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+.text-balance { text-wrap: balance; }
+
+.motif-divider {
+  height: 14px;
+  width: 100%;
+  background-image: radial-gradient(circle, #C9A24B 1.4px, transparent 1.6px);
+  background-size: 18px 18px;
+  opacity: 0.35;
+  mask-image: linear-gradient(90deg, transparent, black 20%, black 80%, transparent);
+  -webkit-mask-image: linear-gradient(90deg, transparent, black 20%, black 80%, transparent);
 }
 
 .brass-rule {
@@ -14,9 +59,6 @@ body {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(90deg, transparent, theme('colors.gold') 20%, theme('colors.gold') 80%, transparent);
+  background: linear-gradient(90deg, transparent, #C9A24B 20%, #C9A24B 80%, transparent);
   opacity: 0.5;
 }
-
-::-webkit-scrollbar { width: 6px; }
-::-webkit-scrollbar-thumb { background: theme('colors.base-line'); border-radius: 4px; }
